@@ -1,0 +1,7 @@
+(function(root){
+function quotas(subjects,n){const totalWeight=subjects.reduce((sum,s)=>sum+s.quota,0);if(!subjects.length||!totalWeight)return [];const rows=subjects.map(s=>({id:s.id,n:Math.floor(n*s.quota/totalWeight),r:n*s.quota/totalWeight%1}));let left=n-rows.reduce((a,s)=>a+s.n,0);[...rows].sort((a,b)=>b.r-a.r).slice(0,left).forEach(s=>s.n++);return rows;}
+function shuffle(xs){const a=[...xs];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function sample(pool,subjects,n,subject,preferredProvider){const draw=p=>{const shuffled=shuffle(p);return preferredProvider?[...shuffled.filter(q=>q.provider===preferredProvider),...shuffled.filter(q=>q.provider!==preferredProvider)]:shuffled;};if(subject){if(pool.length<n)throw Error('ข้อสอบในตัวเลือกนี้มีไม่พอ กรุณาลดจำนวนข้อ');return shuffle(draw(pool).slice(0,n));}let out=[];for(const s of quotas(subjects,n)){let p=pool.filter(q=>q.subject===s.id);if(p.length<s.n)throw Error('ข้อสอบบางวิชามีไม่พอตามสัดส่วน กรุณาเลือกแหล่งอื่นร่วมด้วย หรือฝึกแยกวิชา');out.push(...draw(p).slice(0,s.n));}return shuffle(out);}
+function score(qs,answers){let marked=qs.filter(q=>q.correct_answer&&q.choices);return {total:marked.length,correct:marked.filter(q=>answers[q.id]===q.correct_answer).length,manual:qs.length-marked.length};}
+const api={quotas,sample,score};if(typeof module!=='undefined')module.exports=api;else root.PoliceCore=api;
+})(typeof window!=='undefined'?window:this);
