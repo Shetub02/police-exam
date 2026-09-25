@@ -10,3 +10,14 @@
 !police-results.css
 !police-mobile.css
 !evidence.html
+!police-sync-config.js
+!police-sync-core.js
+!police-sync.css
+!police-sync.js
+!SUPABASE_SETUP.md
+!supabase/
+supabase/*
+!supabase/setup.sql
+!research/
+research/*
+!research/test-sync.cjs
