@@ -1,0 +1,25 @@
+{
+  "reviewed_at": "2026-09-27",
+  "subject": "general",
+  "included_track": "ปป",
+  "question_pdf": "ข้อสอบจริง/ความสามารถทั่วไป/ข้อสอบความสามารถทั่วไป(เลข).pdf",
+  "answer_pdf": "ข้อสอบจริง/ความสามารถทั่วไป/Copy of 01. เฉลยละเอียด ความสามารถทั่วไป.pdf",
+  "total_in_book": 100,
+  "selected_count": 54,
+  "selection_rule": "เลือกเฉพาะข้อที่ท้ายโจทย์ระบุ ปป. หรือ ปป.ออกล่าสุดปี เท่านั้น ไม่รวม พฐ., ตม., อก. และสายอื่น",
+  "selected": [
+    {"number":1,"year":2568,"answer":2},{"number":2,"year":2568,"answer":3},{"number":3,"year":2567,"answer":2},{"number":4,"year":2567,"answer":4},{"number":5,"year":2568,"answer":2},{"number":6,"year":2567,"answer":3},
+    {"number":9,"year":2567,"answer":2},{"number":10,"year":2568,"answer":3},{"number":11,"year":2568,"answer":1},{"number":14,"year":2567,"answer":1},
+    {"number":21,"year":2567,"answer":3},{"number":24,"year":2567,"answer":1},{"number":26,"year":2567,"answer":1},{"number":27,"year":2568,"answer":2},
+    {"number":32,"year":2568,"answer":1},{"number":34,"year":2569,"answer":1},{"number":36,"year":2568,"answer":2},{"number":37,"year":2567,"answer":4},{"number":38,"year":2569,"answer":4},{"number":39,"year":2569,"answer":2},
+    {"number":43,"year":2568,"answer":2},{"number":48,"year":2569,"answer":3},{"number":49,"year":2568,"answer":2},{"number":50,"year":2569,"answer":3},
+    {"number":52,"year":2569,"answer":1},{"number":53,"year":2569,"answer":3},{"number":54,"year":2567,"answer":1},{"number":55,"year":2568,"answer":1},{"number":56,"year":2567,"answer":4},{"number":58,"year":2567,"answer":3},
+    {"number":60,"year":2569,"answer":3},{"number":61,"year":2569,"answer":3},{"number":63,"year":2569,"answer":3},{"number":65,"year":2567,"answer":1},
+    {"number":70,"year":2567,"answer":3},{"number":71,"year":2569,"answer":3},{"number":72,"year":2569,"answer":2},{"number":73,"year":2568,"answer":1},
+    {"number":75,"year":2569,"answer":2},{"number":76,"year":2569,"answer":4},{"number":78,"year":2569,"answer":1},{"number":79,"year":2568,"answer":3},{"number":80,"year":2569,"answer":1},{"number":81,"year":2569,"answer":1},
+    {"number":86,"year":2569,"answer":3},{"number":87,"year":2568,"answer":2},{"number":88,"year":2569,"answer":2},{"number":91,"year":2567,"answer":3},
+    {"number":94,"year":2569,"answer":2},{"number":95,"year":2568,"answer":2},{"number":96,"year":2569,"answer":3},{"number":97,"year":2569,"answer":2},{"number":98,"year":2569,"answer":3},{"number":100,"year":2569,"answer":2}
+  ],
+  "excluded_tracks": ["พฐ", "ตม", "อก"],
+  "verification": "ตรวจเครื่องหมายสายจากภาพครบ 24 หน้าข้อสอบ และเทียบเลขคำตอบกับหน้าตารางเฉลย 1-100"
+}

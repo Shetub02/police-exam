@@ -22,6 +22,7 @@ button, a, summary, input, select { touch-action: manipulation; }
   .card { padding: 18px; margin-bottom: 14px; border-radius: 13px; }
   .topline { flex-wrap: wrap; gap: 10px; }
   .question { font-size: 18px; line-height: 1.75; }
+  .question-image { max-height: none; margin: 14px 0; border-radius: 8px; }
   .choice { padding: 14px 12px; gap: 12px; line-height: 1.6; }
   .actions > button { flex: 1 1 auto; }
   .numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(44px, 1fr)); gap: 8px; }

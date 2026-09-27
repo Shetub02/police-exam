@@ -4,6 +4,7 @@
 !index.html
 !police_suppression_real_exam_by_subject.html
 !police-data.js
+!police-real-data.js
 !police-core.js
 !police-app.js
 !police-style.css
@@ -21,3 +22,16 @@ supabase/*
 !research/
 research/*
 !research/test-sync.cjs
+!research/import_guru_actual.py
+!research/guru-pp-actual-selection.json
+!research/test-real-data.cjs
+!assets/
+assets/*
+!assets/real-general/
+!assets/real-general/*.jpg
+!ข้อสอบจริง/
+ข้อสอบจริง/*
+!ข้อสอบจริง/ความสามารถทั่วไป/
+ข้อสอบจริง/ความสามารถทั่วไป/*
+!ข้อสอบจริง/ความสามารถทั่วไป/ข้อสอบความสามารถทั่วไป(เลข).pdf
+!ข้อสอบจริง/ความสามารถทั่วไป/Copy of 01. เฉลยละเอียด ความสามารถทั่วไป.pdf
