@@ -5,6 +5,7 @@
 !police_suppression_real_exam_by_subject.html
 !police-data.js
 !police-real-data.js
+!police-real-english-data.js
 !police-core.js
 !police-app.js
 !police-style.css
@@ -23,15 +24,32 @@ supabase/*
 research/*
 !research/test-sync.cjs
 !research/import_guru_actual.py
+!research/import_guru_actual_english.py
+!research/extract_english_text.py
 !research/guru-pp-actual-selection.json
 !research/test-real-data.cjs
 !assets/
 assets/*
 !assets/real-general/
 !assets/real-general/*.jpg
+!assets/real-english/
+!assets/real-english/q081.jpg
+!assets/real-english/q082.jpg
+!assets/real-english/q083.jpg
+!assets/real-english/q084.jpg
+!assets/real-english/q085.jpg
+!assets/real-english/q086.jpg
+!assets/real-english/q087.jpg
+!assets/real-english-explanations/
+!assets/real-english-explanations/*.jpg
 !ข้อสอบจริง/
 ข้อสอบจริง/*
 !ข้อสอบจริง/ความสามารถทั่วไป/
 ข้อสอบจริง/ความสามารถทั่วไป/*
 !ข้อสอบจริง/ความสามารถทั่วไป/ข้อสอบความสามารถทั่วไป(เลข).pdf
 !ข้อสอบจริง/ความสามารถทั่วไป/Copy of 01. เฉลยละเอียด ความสามารถทั่วไป.pdf
+!ข้อสอบจริง/อังกฤษ/
+ข้อสอบจริง/อังกฤษ/*
+!ข้อสอบจริง/อังกฤษ/ข้อสอบอังกฤษ.pdf
+!ข้อสอบจริง/อังกฤษ/ข้อสอบอังกฤษ Extract.pdf
+!ข้อสอบจริง/อังกฤษ/Copy of 01. เฉลยละเอียดภาษาอังกฤษv.1.pdf
