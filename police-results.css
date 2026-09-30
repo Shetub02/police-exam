@@ -10,7 +10,7 @@
 .wrong-mark, .correct-mark { display: inline-block; margin-left: 8px; padding: 3px 9px; border-radius: 999px; font-size: 13px; }
 .wrong-mark { color: #a61f1f; background: #ffdede; }
 .correct-mark { color: #17623f; background: #dbf3e6; }
-.review-choices p { padding: 11px 13px; margin: 7px 0; border-radius: 7px; }
+.review-choices p { padding: 11px 13px; margin: 7px 0; border-radius: 7px; white-space: pre-wrap; }
 .review-choices .wrong-choice { color: #991f1f; background: #ffdede; border: 1px solid #df5a5a; }
 .review-choices .correct-choice { color: #155c3b; background: #dff4e8; border: 1px solid #65a985; }
 .review-choices span { float: right; font-size: 13px; font-weight: 700; }

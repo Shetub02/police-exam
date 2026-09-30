@@ -5,6 +5,9 @@ html { -webkit-text-size-adjust: 100%; }
 .choice > b { flex-shrink: 0; }
 select { max-width: 100%; }
 button, a, summary, input, select { touch-action: manipulation; }
+.timer-controls { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+.timer-controls .timer { min-width: 66px; text-align: center; }
+.timer-controls button { padding: 9px 12px; }
 
 @media (max-width: 760px) {
   .grid, .fields { grid-template-columns: minmax(0, 1fr); gap: 14px; }
@@ -21,6 +24,7 @@ button, a, summary, input, select { touch-action: manipulation; }
   h2 { font-size: 21px; }
   .card { padding: 18px; margin-bottom: 14px; border-radius: 13px; }
   .topline { flex-wrap: wrap; gap: 10px; }
+  .timer-controls { flex: 1 1 100%; justify-content: flex-end; }
   .question { font-size: 18px; line-height: 1.75; }
   .question-image { max-height: none; margin: 14px 0; border-radius: 8px; }
   .choice { padding: 14px 12px; gap: 12px; line-height: 1.6; }
@@ -44,6 +48,7 @@ button, a, summary, input, select { touch-action: manipulation; }
   .card { padding: 14px; }
   .header-actions nav { font-size: 14px; }
   .topline > button { padding: 10px 12px; }
+  .timer-controls button { flex: 1 1 auto; }
   .timer { font-size: 20px; }
   .badge { max-width: 100%; }
   .fields .subject-picker > div { grid-template-columns: minmax(0, 1fr); }

@@ -2,7 +2,11 @@
 function quotas(subjects,n){const totalWeight=subjects.reduce((sum,s)=>sum+s.quota,0);if(!subjects.length||!totalWeight)return [];const rows=subjects.map(s=>({id:s.id,n:Math.floor(n*s.quota/totalWeight),r:n*s.quota/totalWeight%1}));let left=n-rows.reduce((a,s)=>a+s.n,0);[...rows].sort((a,b)=>b.r-a.r).slice(0,left).forEach(s=>s.n++);return rows;}
 function shuffle(xs){const a=[...xs];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function normalizeQuestionText(value){return String(value||'').normalize('NFKC').toLowerCase().replace(/คำสั่ง\s*:?\s*choose the best answer\.?/gi,'').replace(/[^\p{L}\p{N}]+/gu,'');}
-function questionKey(q){return [q.subject,normalizeQuestionText(q.reading_passage),normalizeQuestionText(q.question_text||q.question)].join('|');}
+function questionKey(q){
+ const text=String(q.question_text||q.question||''),normalizedText=normalizeQuestionText(text);
+ const needsImage=Boolean(q.question_image)&&/(?:what\s+does\s+this\s+sign\s+mean|look\s+at\s+(?:the\s+)?(?:picture|image)|จาก(?:ภาพ|รูป)|ภาพ(?:ต่อไป|ข้างต้น)|รูป(?:ต่อไป|ข้างต้น))/i.test(text);
+ return [q.subject,normalizeQuestionText(q.reading_passage),normalizedText,needsImage?normalizeQuestionText(q.question_image):''].join('|');
+}
 function preferMixed(p,preferredProvider){
  const all=shuffle(p);if(!preferredProvider)return all;
  const preferred=all.filter(q=>q.provider===preferredProvider),others=all.filter(q=>q.provider!==preferredProvider),out=[];
