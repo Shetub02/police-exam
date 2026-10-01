@@ -11,6 +11,8 @@
 
   for (const question of data.questions) {
     if (question.representation !== 'actual' || !folders[question.subject]) continue;
+    // ข้อคอมพิวเตอร์ 51 มีเฉลยภาพเดิมคลาดเคลื่อน: การบันทึก URL คือ Bookmark ไม่ใช่ Homepage
+    if (question.subject === 'it' && question.question_number === 51) continue;
     const number = String(question.question_number).padStart(3, '0');
     question.explanation_image = `${folders[question.subject]}/q${number}.jpg`;
     question.explanation_author = 'source';

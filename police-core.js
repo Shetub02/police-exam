@@ -29,5 +29,6 @@ function ordered(p,{mode='all',preferredProvider,completedIds=[],wrongIds=[]}={}
 function sampleSmart(pool,subjects,n,options={}){const subject=options.subject||'';if(subject){const candidates=ordered(pool,options);if(candidates.length<n)throw Error('ข้อสอบที่เนื้อหาไม่ซ้ำในตัวเลือกนี้มีไม่พอ กรุณาลดจำนวนข้อ');return shuffle(candidates.slice(0,n));}let out=[];for(const s of quotas(subjects,n)){const candidates=ordered(pool.filter(q=>q.subject===s.id),options);if(candidates.length<s.n)throw Error('ข้อสอบบางวิชาที่มีเนื้อหาไม่ซ้ำมีไม่พอตามสัดส่วน กรุณาเลือกแหล่งอื่นร่วมด้วย หรือลดจำนวนข้อ');out.push(...candidates.slice(0,s.n));}return shuffle(out);}
 function sample(pool,subjects,n,subject,preferredProvider){return sampleSmart(pool,subjects,n,{subject,preferredProvider});}
 function score(qs,answers){let marked=qs.filter(q=>q.correct_answer&&q.choices);return {total:marked.length,correct:marked.filter(q=>answers[q.id]===q.correct_answer).length,manual:qs.length-marked.length};}
-const api={quotas,sample,sampleSmart,questionKey,score};if(typeof module!=='undefined')module.exports=api;else root.PoliceCore=api;
+function percentage(correct,total){return total?Math.round(correct*100/total):0;}
+const api={quotas,sample,sampleSmart,questionKey,score,percentage};if(typeof module!=='undefined')module.exports=api;else root.PoliceCore=api;
 })(typeof window!=='undefined'?window:this);

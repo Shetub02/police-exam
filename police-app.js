@@ -62,8 +62,11 @@ results=function(){baseResults();if(page!=='results'||!session)return;const rows
 progressStyle.textContent+='.subject-rings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.subject-ring-item{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid #dbe2e8;border-radius:10px}.subject-ring{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;flex:0 0 64px;background:radial-gradient(circle,#fff 58%,transparent 59%),conic-gradient(#27719a calc(var(--pct)*1%),#dce6ed 0);font-size:14px}.subject-ring b{font-size:15px}:root[data-theme="dark"] .subject-ring-item{border-color:#31556d}:root[data-theme="dark"] .subject-ring{background:radial-gradient(circle,#10283a 58%,transparent 59%),conic-gradient(#5ca3d4 calc(var(--pct)*1%),#29485d 0)}@media(max-width:620px){.subject-rings{grid-template-columns:1fr}.subject-ring-item{padding:9px}}';
 const resultsWithSubjectStats=results;
 results=function(){resultsWithSubjectStats();if(page!=='results'||!session)return;const footer=document.createElement('section');footer.className='card results-footer';footer.innerHTML='<div class="actions"><button class="primary" data-action="home">← กลับหน้าหลัก</button></div>';document.querySelector('#reviews').after(footer);};
+const resultsWithOverallPercent=results;
+results=function(){resultsWithOverallPercent();if(page!=='results'||!session)return;const s=C.score(session.ids.map(id=>byId.get(id)),session.answers),pct=C.percentage(s.correct,s.total),stat=document.querySelector('.stat');if(!stat)return;stat.innerHTML=`<span>${s.correct} / ${s.total}</span><strong class="overall-percent">${pct}%</strong>`;const label=stat.nextElementSibling;if(label)label.textContent=`ตอบถูก ${s.correct} จาก ${s.total} ข้อ คิดเป็น ${pct}%`;};
+progressStyle.textContent+='.stat{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}.overall-percent{font-size:28px;color:#27719a}:root[data-theme="dark"] .overall-percent{color:#7fc5f1}';
 const homeWithPercentages=home;
-home=function(){homeWithPercentages();const historyCard=[...app.querySelectorAll('.card')].find(card=>card.querySelector('h2')?.textContent==='การฝึกล่าสุด');if(!historyCard)return;historyCard.querySelectorAll('.quota').forEach((row,index)=>{const entry=history[index];if(!entry||!entry.total)return;const percent=Math.round(entry.correct*100/entry.total);row.lastElementChild.textContent=`ตอบถูก ${entry.correct}/${entry.total} (${percent}%)`;});};
+home=function(){homeWithPercentages();const historyCard=[...app.querySelectorAll('.card')].find(card=>card.querySelector('h2')?.textContent==='การฝึกล่าสุด');if(historyCard)historyCard.querySelectorAll('.quota').forEach((row,index)=>{const entry=history[index];if(!entry||!entry.total)return;const percent=C.percentage(entry.correct,entry.total);row.lastElementChild.textContent=`ตอบถูก ${entry.correct}/${entry.total} (${percent}%)`;});document.querySelectorAll('.attempt-log summary').forEach((summary,index)=>{const log=completedAttempts[index];if(!log?.total)return;summary.textContent=`${log.date} · ${log.ids.length} ข้อ · คะแนน ${log.correct}/${log.total} (${C.percentage(log.correct,log.total)}%)`;});};
 const homeWithFreshRandom=home;
 home=function(){homeWithFreshRandom();const provider=document.querySelector('#provider');if(!provider)return;const holder=document.createElement('div');holder.innerHTML='<label for="repeat">การเลือกข้อจากประวัติ</label><select id="repeat"><option value="unseen">เน้นข้อที่ยังไม่เคยทำ</option><option value="all">สุ่มจากทุกข้อ</option><option value="wrong">ทบทวนข้อที่เคยผิดก่อน</option></select>';provider.closest('div').after(holder);const repeat=holder.querySelector('select');repeat.value=settings.repeat;repeat.onchange=()=>{settings.repeat=repeat.value;preview();};preview();};
 const previewWithFreshCounts=preview;
@@ -73,6 +76,55 @@ evidence=function(){evidenceWithCutoffStats();const stats=D.cutoff_stats||[];if(
 progressStyle.textContent+='.cutoff-row{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-top:1px solid #dbe2e8}.cutoff-row:first-of-type{border-top:0}.cutoff-row h3{margin:8px 0}.cutoff-row p{margin:7px 0}.cutoff-score,.cutoff-unavailable{min-width:150px;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;text-align:right}.cutoff-score b{font-size:27px;color:#153b56}.cutoff-score span{font-size:20px;font-weight:700;color:#27719a}.cutoff-score small,.cutoff-unavailable small{margin-top:4px}.cutoff-rumor b{color:#8a4b00}.cutoff-unavailable b{color:#9b5a00}:root[data-theme="dark"] .cutoff-row{border-color:#31556d}:root[data-theme="dark"] .cutoff-score b{color:#e7f4ff}:root[data-theme="dark"] .cutoff-score span{color:#7fc5f1}:root[data-theme="dark"] .cutoff-rumor b,:root[data-theme="dark"] .cutoff-unavailable b{color:#f4c76c}@media(max-width:620px){.cutoff-row{flex-direction:column}.cutoff-score,.cutoff-unavailable{align-items:flex-start;text-align:left}}';
 const previewWithAvailableSubjects=preview;
 preview=function(){previewWithAvailableSubjects();const available=new Set(D.questions.filter(q=>q.eligible!==false&&!String(q.question_text||'').includes('เนื้อหาโจทย์จากไฟล์ OCR Extract')&&!(q.choices&&Object.values(q.choices).some(value=>String(value).includes('ตัวเลือกจากข้อสอบต้นฉบับ')||String(value).includes('คำตอบตามตารางเฉลยเอกสาร')))&&(settings.provider!=='guru'||q.provider==='guru-police')&&(settings.kind==='all'||q.representation===settings.kind)).map(q=>q.subject));document.querySelectorAll('.subject-picker input').forEach(input=>{const label=input.closest('label'),show=available.has(input.value);if(label)label.hidden=!show;input.disabled=!show;});};
+const quizWithInstantReview=quiz;
+quiz=function(){
+  if(session&&!Array.isArray(session.revealed)){session.revealed=[];save();}
+  quizWithInstantReview();
+  if(page!=='quiz'||!session||session.finished||session.paused)return;
+  const q=byId.get(session.ids[session.index]),answer=session.answers[q.id],revealed=session.revealed.includes(q.id);
+  const questionCard=document.querySelector('.grid section.card');
+  const navigation=questionCard?.querySelectorAll(':scope > .actions');
+  const navigationRow=navigation?.[navigation.length-1];
+  if(!questionCard||!navigationRow)return;
+  const submitRow=document.createElement('div');
+  submitRow.className='actions question-submit';
+  submitRow.innerHTML=`<button class="primary" data-action="submit-question" ${!answer||revealed?'disabled':''}>${revealed?'ส่งคำตอบข้อนี้แล้ว':'ส่งคำตอบข้อนี้'}</button>${!answer&&!revealed?'<small class="muted">เลือกคำตอบก่อนส่ง</small>':''}`;
+  navigationRow.before(submitRow);
+  if(!revealed)return;
+  questionCard.querySelectorAll('.choice[data-answer]').forEach(button=>{
+    button.disabled=true;
+    const key=button.dataset.answer;
+    if(key===q.correct_answer)button.classList.add('instant-correct');
+    if(key===answer&&key!==q.correct_answer)button.classList.add('instant-wrong');
+  });
+  const correct=q.correct_answer&&answer===q.correct_answer;
+  const explanation=Array.isArray(q.explanation_th)?q.explanation_th.map(esc).join('<br>'):esc(q.explanation_th||'');
+  const review=document.createElement('section');
+  review.className=`instant-review ${correct?'instant-review-correct':'instant-review-wrong'}`;
+  review.setAttribute('aria-live','polite');
+  review.innerHTML=`<h3>${q.correct_answer?(correct?'✓ ตอบถูก':'✕ ตอบผิด'):'ตรวจคำตอบแล้ว'}</h3><p>คำตอบของคุณ: <b>${esc(answer||'ยังไม่ได้ตอบ')}</b>${q.correct_answer?` · คำตอบที่ถูก: <b>${esc(q.correct_answer)}</b>`:''}</p><div class="explain"><b>เฉลย: ${esc(q.source_answer||q.correct_answer||'ดูคำอธิบาย')}</b><br>${explanation}${q.explanation_image?`<img class="explanation-image" src="${esc(q.explanation_image)}" alt="คำอธิบายละเอียดข้อ ${session.index+1}">`:''}</div>`;
+  submitRow.after(review);
+};
+app.addEventListener('click',e=>{const button=e.target.closest('button[data-action="submit-question"]');if(!button||button.disabled||!session||session.finished)return;const id=session.ids[session.index];if(!session.answers[id])return;if(!Array.isArray(session.revealed))session.revealed=[];if(!session.revealed.includes(id))session.revealed.push(id);save();quiz();});
+progressStyle.textContent+='.question-submit{align-items:center;margin-top:22px}.instant-review{margin:18px 0;padding:18px;border:2px solid;border-radius:12px}.instant-review h3{margin:0 0 8px}.instant-review-correct{background:#effaf4;border-color:#3b8a65}.instant-review-wrong{background:#fff5f5;border-color:#dc4949}.choice.instant-correct:disabled,.choice.instant-wrong:disabled{opacity:1}.choice.instant-correct{color:#155c3b;background:#dff4e8;border:2px solid #65a985}.choice.instant-wrong{color:#991f1f;background:#ffdede;border:2px solid #df5a5a}:root[data-theme="dark"] .instant-review-correct{background:#174837;border-color:#71bb94}:root[data-theme="dark"] .instant-review-wrong{background:#421f26;border-color:#e26a6a}:root[data-theme="dark"] .choice.instant-correct{color:#c9f4db;background:#174837;border-color:#71bb94}:root[data-theme="dark"] .choice.instant-wrong{color:#ffd4d4;background:#56242b;border-color:#e26a6a}@media(max-width:520px){.question-submit button{width:100%}.instant-review{padding:14px}}';
+const imageViewer=document.createElement('div');
+imageViewer.id='image-viewer';
+imageViewer.className='image-viewer hidden';
+imageViewer.setAttribute('role','dialog');
+imageViewer.setAttribute('aria-modal','true');
+imageViewer.setAttribute('aria-label','ภาพขยาย');
+imageViewer.innerHTML='<button class="image-viewer-close" type="button" aria-label="ปิดภาพขยาย">✕</button><div class="image-viewer-content"><img alt=""><p></p></div>';
+document.body.append(imageViewer);
+let imageViewerOpener=null;
+function openImageViewer(image){imageViewerOpener=image;const large=imageViewer.querySelector('img'),caption=imageViewer.querySelector('p');large.src=image.currentSrc||image.src;large.alt=image.alt||'ภาพขยาย';caption.textContent=image.alt||'';imageViewer.classList.remove('hidden');document.body.classList.add('image-viewer-open');imageViewer.querySelector('.image-viewer-close').focus();}
+function closeImageViewer(){if(imageViewer.classList.contains('hidden'))return;imageViewer.classList.add('hidden');document.body.classList.remove('image-viewer-open');imageViewer.querySelector('img').removeAttribute('src');imageViewerOpener?.focus();imageViewerOpener=null;}
+document.addEventListener('click',e=>{const image=e.target.closest('.question-image,.explanation-image');if(image){openImageViewer(image);return;}if(e.target===imageViewer||e.target.closest('.image-viewer-close'))closeImageViewer();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!imageViewer.classList.contains('hidden')){closeImageViewer();return;}if((e.key==='Enter'||e.key===' ')&&e.target.matches('.question-image,.explanation-image')){e.preventDefault();openImageViewer(e.target);}});
+const quizWithImageButtons=quiz;
+quiz=function(){quizWithImageButtons();document.querySelectorAll('.question-image,.explanation-image').forEach(image=>{image.tabIndex=0;image.setAttribute('role','button');image.setAttribute('aria-label',(image.alt||'ภาพ')+' · กดเพื่อขยาย');});};
+const reviewWithImageButtons=review;
+review=function(){reviewWithImageButtons();document.querySelectorAll('.question-image,.explanation-image').forEach(image=>{image.tabIndex=0;image.setAttribute('role','button');image.setAttribute('aria-label',(image.alt||'ภาพ')+' · กดเพื่อขยาย');});};
+progressStyle.textContent+='.question-image,.explanation-image{cursor:zoom-in}.question-image:focus-visible,.explanation-image:focus-visible{outline:3px solid #d5a340;outline-offset:4px}.image-viewer{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:58px 24px 24px;background:#07131de8;cursor:zoom-out}.image-viewer-content{width:min(96vw,1500px);height:calc(100vh - 82px);display:flex;flex-direction:column;align-items:center;justify-content:center}.image-viewer-content img{display:block;max-width:100%;max-height:calc(100% - 38px);object-fit:contain;background:#fff;border-radius:10px;box-shadow:0 12px 45px #0008;cursor:default}.image-viewer-content p{margin:10px 0 0;color:#fff;text-align:center}.image-viewer-close{position:fixed;top:14px;right:18px;z-index:1;width:44px;height:44px;padding:0;border-radius:50%;font-size:21px;color:#fff;background:#173b58;border-color:#8ea7b8}.image-viewer-close:hover{background:#245878}.image-viewer-open{overflow:hidden}@media(max-width:620px){.image-viewer{padding:58px 8px 10px}.image-viewer-content{width:100%;height:calc(100vh - 68px)}.image-viewer-close{right:10px}}';
 window.PoliceProgress={
   snapshot:()=>JSON.parse(JSON.stringify({version:1,history,attempts:completedAttempts,session})),
   active:()=>page==='quiz'&&session&&!session.finished,

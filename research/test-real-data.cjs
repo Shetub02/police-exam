@@ -36,8 +36,8 @@ for (const q of actual) {
   assert.ok(q.explanation_th.join('').trim().length > 10, `${q.id}: explanation missing`);
   if (q.question_image) assert.ok(fs.existsSync(path.join(root, q.question_image)), `${q.id}: image missing`);
   if (['english', 'thai', 'it', 'law', 'social'].includes(q.subject)) {
-    assert.ok(q.explanation_image, `${q.id}: explanation image path missing`);
-    assert.ok(fs.existsSync(path.join(root, q.explanation_image)), `${q.id}: explanation image missing`);
+    assert.ok(q.explanation_image || q.explanation_th.join('').trim().length > 60, `${q.id}: detailed explanation missing`);
+    if (q.explanation_image) assert.ok(fs.existsSync(path.join(root, q.explanation_image)), `${q.id}: explanation image missing`);
   }
   if (q.subject === 'english') {
     assert.ok(q.question_text.length > 10, `${q.id}: question text missing`);
@@ -69,6 +69,12 @@ const general77 = actualGeneral.find(q => q.question_number === 77);
 assert.equal(general77.question_text, 'กำหนดให้ cos A = 5/13 แล้ว tan A มีค่าเท่าใด (ปป.67)');
 assert.deepEqual(Array.from(Object.values(general77.choices)), ['2', '2.2', '2.4', '2.6']);
 assert.equal(general77.correct_answer, 'C');
+
+const computer51 = actualComputer.find(q => q.question_number === 51);
+assert.equal(computer51.correct_answer, 'B');
+assert.equal(computer51.choices.B, 'Bookmark');
+assert.ok(computer51.explanation_th.join('').includes('บันทึกที่อยู่ของหน้าเว็บไซต์'));
+assert.ok(!computer51.explanation_image, 'computer question 51 must not show the incorrect source explanation image');
 
 for (const number of [36, 38, 39, 40, 44, 96]) {
   const question = actualThai.find(q => q.question_number === number);

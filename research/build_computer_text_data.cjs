@@ -1,6 +1,8 @@
 const fs = require('fs');
 
 const answers = [1,4,2,4,4,3,1,4,1,1,3,3,1,2,2,1,4,2,3,1,1,2,3,3,2,3,3,4,2,1,4,3,4,2,4,3,2,3,2,3,1,1,2,2,3,2,2,2,2,1,4,3,3,1,3,4,2,3,4,1,4,2,1,2,2,1,4,3,2,4,1,2,1,3,1,3,3,2,2,3,2,3,2,1,3,4,4,2,2,2,3,2,4,1,1,4,1,4,2,2];
+// เอกสารเฉลยระบุข้อ 51 เป็น Homepage แต่ความหมายของการบันทึก URL ไว้กลับมาเปิดคือ Bookmark
+answers[50] = 2;
 
 const rows = [
 ['คอมพิวเตอร์ประเภทใดมีหน้าที่ประมวลผลข้อมูลและคำนวณเส้นทางการบินที่แม่นยำสำหรับขีปนาวุธเพื่อให้สามารถโจมตีเป้าหมายได้',['Supercomputer','Mainframe computer','Microcomputer','Mid-range computer'],'2568'],
@@ -116,13 +118,15 @@ const questions = rows.map(([question_text, choices, year], index) => {
     subject: 'it', question_number: index + 1, question_text,
     choices: Object.fromEntries(letters.map((l, i) => [l, choices[i]])),
     correct_answer, source_answer: `${correct_answer}. ${correctText}`,
-    explanation_th: [`ดูเหตุผลของตัวเลือกและคำอธิบายละเอียดจากเอกสารเฉลยด้านล่าง`],
-    explanation_image: `assets/real-computer-explanations/q${String(index + 1).padStart(3,'0')}.jpg`,
+    explanation_th: index === 50
+      ? ['Bookmark คือการบันทึกที่อยู่ของหน้าเว็บไซต์ไว้ เพื่อกลับมาเปิดได้รวดเร็วโดยไม่ต้องพิมพ์ URL ใหม่ ส่วน History คือประวัติการเข้าชม Refresh คือการโหลดหน้าใหม่ และ Homepage คือหน้าแรกของเว็บไซต์หรือเบราว์เซอร์']
+      : [`ดูเหตุผลของตัวเลือกและคำอธิบายละเอียดจากเอกสารเฉลยด้านล่าง`],
+    ...(index === 50 ? {} : {explanation_image: `assets/real-computer-explanations/q${String(index + 1).padStart(3,'0')}.jpg`}),
     answer_verified: true, choices_verified: true, year: year === 'หลายปี' ? year : Number(year),
     exam_track: 'รวมทุกสาย', provider: 'guru-police',
     source_id: 'local-guru-actual-computer',
     source_locator: `ข้อ ${index + 1} · OCR Extract PDF`,
-    explanation_source_id: 'local-guru-actual-computer-answer', explanation_author: 'source',
+    explanation_source_id: 'local-guru-actual-computer-answer', explanation_author: index === 50 ? 'reviewed-correction' : 'source',
     evidence_level: 'A', representation: 'actual', eligible: true
   };
 });
