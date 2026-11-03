@@ -27,6 +27,9 @@ answer_keys=[
 4,3,2,1,3, 4,2,1,2,3, 1,1,2,1,2, 3,4,4,2,2,
 2,2,3,2,2, 4,1,2,4,3, 3,2,2,2,4, 3,2,3,2,3]
 
+# ข้อ 89: เฉลยละเอียดระบุข้อ 2 และตรงกับบทอ่าน
+answer_keys[88] = 2
+
 def run_tsv(image_path, output_base):
     subprocess.run([str(TESSERACT),str(image_path.relative_to(ROOT)),str(output_base.relative_to(ROOT)),'-l','tha+eng','--tessdata-dir',str(TESSDATA.relative_to(ROOT)),'--psm','6','tsv'],cwd=ROOT,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 
