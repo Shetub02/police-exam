@@ -6,7 +6,7 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const context = { window: {} };
 vm.createContext(context);
-for (const file of ['police-data.js', 'police-real-data.js', 'police-real-general-fixes.js', 'police-real-english-data.js', 'police-real-thai-data.js', 'police-law-summary-data.js', 'police-real-law-data.js', 'police-real-computer-data.js', 'police-real-social-data.js', 'police-real-explanation-images.js']) {
+for (const file of ['police-data.js', 'police-real-data.js', 'police-real-general-fixes.js', 'police-real-english-data.js', 'police-real-thai-data.js', 'police-law-summary-data.js', 'police-real-law-data.js', 'police-real-computer-data.js', 'police-real-social-data.js', 'police-real-explanation-images.js', 'police-mixed-exam-data.js']) {
   vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context, { filename: file });
 }
 
@@ -75,6 +75,49 @@ assert.equal(computer51.correct_answer, 'B');
 assert.equal(computer51.choices.B, 'Bookmark');
 assert.ok(computer51.explanation_th.join('').includes('บันทึกที่อยู่ของหน้าเว็บไซต์'));
 assert.ok(!computer51.explanation_image, 'computer question 51 must not show the incorrect source explanation image');
+
+const weatherQuestion = actualEnglish.find(q => q.question_number === 96);
+assert.ok(weatherQuestion.reading_passage.startsWith('WEEKEND WEATHER OUTLOOK'));
+assert.ok(weatherQuestion.reading_passage.includes('Saturday: Most areas will experience chilly weather'));
+assert.ok(weatherQuestion.reading_passage.includes('Sunday: The weather will become more unpredictable.'));
+assert.equal(weatherQuestion.correct_answer, 'C');
+
+const chartQuestion = actualGeneral.find(q => q.question_number === 53);
+assert.equal(chartQuestion.question_image, 'assets/real-general/q053-complete.jpg');
+assert.ok(chartQuestion.image_alt.includes('ครบทั้งวง'));
+
+const importReport = JSON.parse(fs.readFileSync(path.join(root, 'research/mixed-exam-import-report.json'), 'utf8'));
+const mixed = context.window.POLICE_MIXED_EXAM_DATA.questions;
+assert.equal(mixed.length, 88);
+assert.equal(importReport.selected_count, 121);
+assert.equal(importReport.duplicate_count, 33);
+assert.equal(importReport.added_count, mixed.length);
+assert.equal(new Set(all.map(q => q.id)).size, all.length, 'all question IDs must be unique');
+assert.deepEqual(importReport.subjects, {
+  general: { selected: 20, added: 15, duplicates: 5 },
+  thai: { selected: 20, added: 15, duplicates: 5 },
+  it: { selected: 40, added: 28, duplicates: 12 },
+  law: { selected: 26, added: 15, duplicates: 11 },
+  english: { selected: 15, added: 15, duplicates: 0 }
+});
+for (const q of mixed) {
+  assert.equal(q.representation, 'mock', `${q.id}: classify the mixed collection as practice questions`);
+  assert.ok(!importReport.excluded_numbers.includes(q.question_number), `${q.id}: excluded question imported`);
+  assert.equal(Object.keys(q.choices).join(''), 'ABCD');
+  assert.ok(q.question_text.length > 8);
+  assert.equal(new Set(Object.values(q.choices)).size, 4);
+  assert.equal(q.source_answer, `${q.correct_answer}. ${q.choices[q.correct_answer]}`);
+  assert.ok(q.explanation_th.join('').length > 10);
+  if (q.explanation_image) assert.ok(fs.existsSync(path.join(root, q.explanation_image)));
+}
+for (const duplicate of importReport.duplicates) {
+  assert.ok(all.some(q => q.id === duplicate.existing_id), `duplicate ${duplicate.question_number}: existing question missing`);
+  assert.ok(!mixed.some(q => q.question_number === duplicate.question_number));
+}
+assert.ok(mixed.find(q => q.question_number === 150).reading_passage.includes('Driving and Cell Phones'));
+assert.ok(!mixed.find(q => q.question_number === 149).choices.D.includes('Driving and Cell Phones'));
+assert.equal(mixed.find(q => q.question_number === 13).choices.B, '1/13');
+assert.ok(mixed.find(q => q.question_number === 17).question_text.includes('∧'));
 
 for (const number of [36, 38, 39, 40, 44, 96]) {
   const question = actualThai.find(q => q.question_number === number);

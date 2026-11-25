@@ -133,7 +133,7 @@ C={
 
 P={
 88:'NOTICE OF POWER OUTAGE\nThe Metropolitan Electricity Authority (MEA) will temporarily interrupt electricity supply on Sunday, March 22, 2026, from 8:00 AM to 4:00 PM. This outage is necessary for the installation of new high-voltage cables and maintenance of the power distribution system to ensure long-term reliability.\nAffected areas: Sukhumvit Soi 21 to Soi 23; Asoke Montri Road (northbound side only).\nResidents and businesses in these areas are advised to unplug sensitive electronic devices to prevent damage from power surges when electricity is restored.',
-96:'WEEKEND WEATHER\nThe Meteorological Department has released the forecast for the upcoming weekend. A high-pressure system from the north is moving across the region, resulting in a significant drop in temperature.\nSaturday: Most areas will experience chilly weather in the early morning with some light fog. However, the skies will be clear and sunny during the afternoon. The maximum temperature will be around 25°C.\nSunday: The weather will become more unpredictable. There is a 60% chance of isolated thunderstorms and heavy rain in the evening. Residents are advised to carry an umbrella and drive with caution due to slippery roads. Small boats should remain ashore as strong winds are expected in coastal areas.'
+96:'WEEKEND WEATHER OUTLOOK\nThe Meteorological Department has released the forecast for the upcoming weekend. A high-pressure system from the north is moving across the region, resulting in a significant drop in temperature.\nSaturday: Most areas will experience chilly weather in the early morning with some light fog. However, the skies will be clear and sunny during the afternoon. The maximum temperature will be around 25°C.\nSunday: The weather will become more unpredictable. There is a 60% chance of isolated thunderstorms and heavy rain in the evening. Residents are advised to carry an umbrella and drive with caution due to slippery roads. Small boats should remain ashore as strong winds are expected in coastal areas.'
 }
 
 PROMPTS={
@@ -180,7 +180,7 @@ def parse(n):
                 seq=[hit];expect=2
     if not chosen:
         result={'question':' '.join(lines),'choices':{},'parsed':False,'reading_passage':P.get(n)}
-        if n in Q and n in C: result={'question':Q[n],'choices':dict(zip('ABCD',C[n])),'parsed':True}
+        if n in Q and n in C: result={'question':Q[n],'choices':dict(zip('ABCD',C[n])),'parsed':True,'reading_passage':P.get(n)}
         return result
     qend=chosen[0][0]
     question=clean(' '.join(lines[:qend]))

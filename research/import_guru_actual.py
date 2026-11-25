@@ -34,6 +34,16 @@ labels = [
 # หน้าที่ 20 เบลอมากจน OCR อ่านเลขข้อไม่ได้ จึงกำหนดตำแหน่งจากภาพต้นฉบับโดยตรง
 manual_starts = {82:320, 83:760, 84:1460, 85:2050}
 
+
+def render_complete_q53(document):
+    # Page 13 contains the entire pie chart, including the labels above it.
+    image = document[12].render(scale=3).to_pil().convert("RGB")
+    width, height = image.size
+    chart = image.crop((round(width * .30), round(height * .18), round(width * .82), round(height * .48)))
+    output = ASSETS / "q053-complete.jpg"
+    chart.save(output, quality=94, optimize=True)
+    return output
+
 def answer_sections():
     text = "\n".join((p.extract_text() or "") for p in PdfReader(str(ANSWER_PDF)).pages)
     matches = list(re.finditer(r"(?m)(\d{1,3})\.\s*เฉลย\s*ข้อ\s*(\d+)\.\s*(?:แนวคิด)?", text))
@@ -110,6 +120,7 @@ def build():
                 'note':f'เอกสารระบุสาย {track} ปี {year}; แสดงภาพต้นฉบับเพื่อรักษาสูตรและรูปประกอบ',
                 'verification_scope':'ตรวจภาพโจทย์และจับคู่ตารางเฉลยตามเลขข้อจากเอกสารคู่กัน'
             })
+    render_complete_q53(document)
     payload={'sources':[
         {'id':'local-guru-actual-general','name':'Guru Academy / Guru Police · ข้อสอบจริงความสามารถทั่วไป 100 ข้อ','platform':'local-pdf','url':'ข้อสอบจริง/ความสามารถทั่วไป/ข้อสอบความสามารถทั่วไป(เลข).pdf','local':True,'status':'reviewed','note':'ไฟล์โจทย์จริง 100 ข้อ รวมหลายสายงาน ตรวจวันที่ 27 ก.ย. 2569'},
         {'id':'local-guru-actual-general-answer','name':'Guru Academy / Guru Police · เฉลยละเอียดความสามารถทั่วไป','platform':'local-pdf','url':'ข้อสอบจริง/ความสามารถทั่วไป/Copy of 01. เฉลยละเอียด ความสามารถทั่วไป.pdf','local':True,'status':'reviewed','note':'ไฟล์เฉลยละเอียดที่จับคู่ด้วยเลขข้อครบ 1–100 ตรวจวันที่ 27 ก.ย. 2569'}

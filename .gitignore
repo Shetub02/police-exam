@@ -5,6 +5,7 @@
 !police_suppression_real_exam_by_subject.html
 !police-data.js
 !police-real-data.js
+!police-mixed-exam-data.js
 !police-real-general-fixes.js
 !police-real-english-data.js
 !police-real-law-data.js
@@ -46,10 +47,15 @@ research/*
 !research/update_social_loader.py
 !research/guru-pp-actual-selection.json
 !research/test-real-data.cjs
+!research/import_mixed_exam.py
+!research/mixed-exam-duplicates.json
+!research/mixed-exam-import-report.json
 !assets/
 assets/*
 !assets/real-general/
 !assets/real-general/*.jpg
+!assets/mixed-exam-explanations/
+!assets/mixed-exam-explanations/*.jpg
 !assets/real-english/
 !assets/real-english/q081.jpg
 !assets/real-english/q082.jpg
@@ -81,3 +87,6 @@ assets/*
 !ข้อสอบจริง/อังกฤษ/ข้อสอบอังกฤษ.pdf
 !ข้อสอบจริง/อังกฤษ/ข้อสอบอังกฤษ Extract.pdf
 !ข้อสอบจริง/อังกฤษ/Copy of 01. เฉลยละเอียดภาษาอังกฤษv.1.pdf
+!ข้อสอบจริง/ข้อสอบรวม/
+ข้อสอบจริง/ข้อสอบรวม/*
+!ข้อสอบจริง/ข้อสอบรวม/ข้อสอบรวม.pdf

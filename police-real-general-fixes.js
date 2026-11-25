@@ -122,6 +122,12 @@
     }
   });
 
+  const q53 = d.questions.find(function (item) { return item.id === 'actual-guru-general-053'; });
+  if (q53) {
+    q53.question_image = 'assets/real-general/q053-complete.jpg';
+    q53.image_alt = 'แผนภูมิรายจ่ายจากเงินเดือน 32,000 บาท พร้อมป้ายค่าอาหาร ค่าบ้าน ค่าเดินทาง และค่าจิปาถะครบทั้งวง';
+  }
+
   const q38=d.questions.find(function(item){return item.subject==='general'&&item.question_number===38&&item.representation==='actual';});
   if(q38){
     q38.explanation_th=['หนังสือ 12 เล่ม ราคา 624 บาท จึงมีราคาเล่มละ 624 ÷ 12 = 52 บาท ดังนั้น 3 เล่ม ราคา 52 × 3 = 156 บาท คำตอบคือข้อ D'];

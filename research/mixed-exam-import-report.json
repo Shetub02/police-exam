@@ -1,0 +1,325 @@
+{
+  "source_id": "local-guru-mixed-30days",
+  "source_pdf": "ข้อสอบจริง/ข้อสอบรวม/ข้อสอบรวม.pdf",
+  "representation": "mock",
+  "reviewed_at": "2026-11-25",
+  "selected_count": 121,
+  "added_count": 88,
+  "duplicate_count": 33,
+  "excluded_numbers": [
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109
+  ],
+  "duplicate_rule": "ข้ามโจทย์ที่มีสถานการณ์ เงื่อนไข และคำถามเดียวกับข้อเดิม แม้สลับหรือปรับตัวเลือก; เก็บข้อที่เปลี่ยนเงื่อนไข ตัวเลข บทอ่าน หรือถามคนละประเด็น",
+  "subjects": {
+    "general": {
+      "selected": 20,
+      "added": 15,
+      "duplicates": 5
+    },
+    "thai": {
+      "selected": 20,
+      "added": 15,
+      "duplicates": 5
+    },
+    "it": {
+      "selected": 40,
+      "added": 28,
+      "duplicates": 12
+    },
+    "law": {
+      "selected": 26,
+      "added": 15,
+      "duplicates": 11
+    },
+    "english": {
+      "selected": 15,
+      "added": 15,
+      "duplicates": 0
+    }
+  },
+  "added_question_numbers": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    13,
+    15,
+    16,
+    17,
+    19,
+    21,
+    22,
+    23,
+    24,
+    26,
+    27,
+    28,
+    31,
+    33,
+    34,
+    35,
+    36,
+    38,
+    39,
+    40,
+    42,
+    43,
+    44,
+    45,
+    46,
+    48,
+    49,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    58,
+    60,
+    61,
+    62,
+    63,
+    65,
+    66,
+    67,
+    69,
+    70,
+    71,
+    76,
+    78,
+    79,
+    80,
+    110,
+    113,
+    114,
+    115,
+    118,
+    119,
+    120,
+    121,
+    123,
+    124,
+    127,
+    131,
+    132,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150
+  ],
+  "duplicates": [
+    {
+      "question_number": 4,
+      "subject": "general",
+      "existing_id": "guru-youtube-YmZ5K4r9AuA-7"
+    },
+    {
+      "question_number": 10,
+      "subject": "general",
+      "existing_id": "actual-guru-general-035"
+    },
+    {
+      "question_number": 14,
+      "subject": "general",
+      "existing_id": "guru-youtube-YmZ5K4r9AuA-5"
+    },
+    {
+      "question_number": 18,
+      "subject": "general",
+      "existing_id": "guru-youtube-YmZ5K4r9AuA-9"
+    },
+    {
+      "question_number": 20,
+      "subject": "general",
+      "existing_id": "actual-guru-general-022"
+    },
+    {
+      "question_number": 25,
+      "subject": "thai",
+      "existing_id": "actual-guru-thai-062"
+    },
+    {
+      "question_number": 29,
+      "subject": "thai",
+      "existing_id": "guru-youtube-YmZ5K4r9AuA-6"
+    },
+    {
+      "question_number": 30,
+      "subject": "thai",
+      "existing_id": "actual-guru-thai-014"
+    },
+    {
+      "question_number": 32,
+      "subject": "thai",
+      "existing_id": "actual-guru-thai-059"
+    },
+    {
+      "question_number": 37,
+      "subject": "thai",
+      "existing_id": "actual-guru-thai-027"
+    },
+    {
+      "question_number": 41,
+      "subject": "it",
+      "existing_id": "actual-guru-computer-031"
+    },
+    {
+      "question_number": 47,
+      "subject": "it",
+      "existing_id": "guru-youtube-YmZ5K4r9AuA-2"
+    },
+    {
+      "question_number": 50,
+      "subject": "it",
+      "existing_id": "actual-guru-computer-046"
+    },
+    {
+      "question_number": 57,
+      "subject": "it",
+      "existing_id": "actual-guru-computer-055"
+    },
+    {
+      "question_number": 59,
+      "subject": "it",
+      "existing_id": "actual-guru-computer-026"
+    },
+    {
+      "question_number": 64,
+      "subject": "it",
+      "existing_id": "actual-guru-computer-069"
+    },
+    {
+      "question_number": 68,
+      "subject": "it",
+      "existing_id": "actual-guru-computer-090"
+    },
+    {
+      "question_number": 72,
+      "subject": "it",
+      "existing_id": "actual-guru-computer-043"
+    },
+    {
+      "question_number": 73,
+      "subject": "it",
+      "existing_id": "actual-guru-computer-044"
+    },
+    {
+      "question_number": 74,
+      "subject": "it",
+      "existing_id": "actual-guru-computer-068"
+    },
+    {
+      "question_number": 75,
+      "subject": "it",
+      "existing_id": "mock-it-55"
+    },
+    {
+      "question_number": 77,
+      "subject": "it",
+      "existing_id": "actual-guru-computer-013"
+    },
+    {
+      "question_number": 111,
+      "subject": "law",
+      "existing_id": "actual-guru-law-030"
+    },
+    {
+      "question_number": 112,
+      "subject": "law",
+      "existing_id": "actual-guru-law-008"
+    },
+    {
+      "question_number": 116,
+      "subject": "law",
+      "existing_id": "actual-guru-law-010"
+    },
+    {
+      "question_number": 117,
+      "subject": "law",
+      "existing_id": "actual-guru-law-066"
+    },
+    {
+      "question_number": 122,
+      "subject": "law",
+      "existing_id": "actual-guru-law-023"
+    },
+    {
+      "question_number": 125,
+      "subject": "law",
+      "existing_id": "actual-guru-law-025"
+    },
+    {
+      "question_number": 126,
+      "subject": "law",
+      "existing_id": "actual-guru-law-053"
+    },
+    {
+      "question_number": 128,
+      "subject": "law",
+      "existing_id": "actual-guru-law-080"
+    },
+    {
+      "question_number": 129,
+      "subject": "law",
+      "existing_id": "actual-guru-law-069"
+    },
+    {
+      "question_number": 130,
+      "subject": "law",
+      "existing_id": "actual-guru-law-054"
+    },
+    {
+      "question_number": 133,
+      "subject": "law",
+      "existing_id": "actual-guru-law-094"
+    }
+  ]
+}
